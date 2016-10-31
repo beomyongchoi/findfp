@@ -1,7 +1,7 @@
 from celery.decorators import task
 from celery.utils.log import get_task_logger
 
-from landingpage.emails import send_welcome_email
+# from landingpage.emails import send_welcome_email
 
 logger = get_task_logger(__name__)
 

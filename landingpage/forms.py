@@ -12,6 +12,6 @@ class SubscriptionForm(forms.ModelForm):
         model = Subscription
         fields = ('name', 'email', )
 
-    def send_email(self):
-        send_welcome_email_task.delay(
-            self.cleaned_data['name'], self.cleaned_data['email'])
+    # def send_email(self):
+    #     send_welcome_email_task.delay(
+    #         self.cleaned_data['name'], self.cleaned_data['email'])
