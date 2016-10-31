@@ -1,6 +1,7 @@
 from django import forms
 
 from .models import Subscription
+from landingpage.tasks import send_welcome_email_task
 
 
 class SubscriptionForm(forms.ModelForm):
@@ -11,8 +12,6 @@ class SubscriptionForm(forms.ModelForm):
         model = Subscription
         fields = ('name', 'email', )
 
-    # def clean_email(self):
-    #     data = self.cleaned_data.get('email')
-    #     if Subscription.objects.filter(email=data).exists():
-    #         raise forms.ValidationError("This email already used")
-    #     return data
+    def send_email(self):
+        send_welcome_email_task.delay(
+            self.cleaned_data['name'], self.cleaned_data['email'])

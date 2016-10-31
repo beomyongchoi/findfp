@@ -519,7 +519,9 @@ fieldset[disabled] .btn-success.active {
     height: 400px;
     background: yellow;
 }
-
+#success {
+    text-align: center;
+}
 .footer-logo {
     width: 120px;
 }
