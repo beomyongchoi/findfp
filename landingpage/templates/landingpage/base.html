@@ -1,0 +1,47 @@
+{% load staticfiles %}
+<html lang="ko">
+    <head>
+        <title>핀톡</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
+    <body>
+        <div class="page-header">
+            <!-- {% if user.is_authenticated %}
+                <a href="{% url 'post_draft_list' %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
+                <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+            {% endif %} -->
+            <a href="/"><img class="header-image" src="{% static 'img/logo.png' %}" alt="FINTALK"></img></a>
+            <div class="top-menu">
+            </div>
+        </div>
+        <div class="content container">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <a href="/"><img class="footer-logo" src="{% static 'img/logo_white.png' %}" alt="FINTALK"></img></a>
+                        <p><span class="big">㈜핀톡 FinTalk | 대표이사 : 백정선 | 사업자등록번호 820-81-00378</span></p>
+                        <p>서울시 강남구 영동대로86길 6 지산빌딩 4층 (대치동 1001-5)<br/>(우)06174</p>
+                        <p><b>T</b> 02.6959.1022<br/>
+                        <b>F</b> 02.6959.1023</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="copyright">Copyright©2016, FINTALK ALL Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,86 @@
+@import url('http://fonts.googleapis.com/earlyaccess/notosanskr.css');
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+html {
+  font-family: 'Noto Sans KR', sans-serif;
+  -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+}
+
+.page-header {
+    position: fixed!important;
+    width: 100%;
+    height: 50px;
+    margin-top: 0;
+    z-index: 701;
+    background-color: #ffffff;
+    opacity: .97;
+    filter: alpha(opacity=97);
+    padding: 20px 20px 20px 40px;
+    box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.1), 0 0px 10px 0 rgba(0, 0, 0, 0.08);
+}
+
+.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
+    color: #cccccc;
+    font-size: 36pt;
+    text-decoration: none;
+}
+
+.header-image {
+    width: 80px;
+}
+
+.content {
+    padding-top: 50px;
+}
+
+.box {
+    padding: 100px 0 30px 0;
+}
+
+h1 {
+    font-family: 'Lato', sans-serif;
+    font-size: 71px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 100;
+    line-height: 75px;
+}
+
+p {
+    font-size: 14px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 100;
+    line-height: 20px;
+}
+
+.top-menu, .top-menu:hover, .top-menu:visited {
+    color: #222222;
+    float: right;
+    font-size: 14pt;
+    margin-right: 20px;
+}
+
+.post {
+    margin-bottom: 70px;
+}
+
+.post h1 a, .post h1 a:visited {
+    color: #000000;
+}
+
+footer {
+    background-color: #000000;
+    color: #dddddd;
+    padding: 60px 0 30px;
+}
+
+.footer-logo {
+    width: 100px;
+    padding-bottom: 25px;
+}
+
+.copyright {
+    float: right;
+}
