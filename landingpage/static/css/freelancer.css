@@ -522,6 +522,11 @@ fieldset[disabled] .btn-success.active {
 #success {
     text-align: center;
 }
+img#loading {
+    display: none;
+    width: 80px;
+    align-items: center;
+}
 .footer-logo {
     width: 120px;
 }

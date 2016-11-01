@@ -110,7 +110,8 @@
                     <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
 
                     {% if not flag %}
-                    <form name="sentMessage" id="contactForm" method="post" action="/#contact">{% csrf_token %}
+                    <form id="contactForm" method="POST">
+                        {% csrf_token %}
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Name</label>
@@ -137,17 +138,14 @@
 
                         <div class="row">
                             <div class="form-group col-xs-12">
-                                <button type="submit" class="btn btn-success btn-lg">구독하기</button>
+                                <button type="submit" class="btn btn-success btn-lg" id="submit">구독하기</button>
+                                <img src="{% static 'img/loading.gif' %}" id="loading" style="display:none"/ >
                             </div>
                         </div>
                     </form>
-                    {% else %}
                         <div id="success">
-                            <h3>{{ name }}님 구독해주셔서 감사합니다.</h3>
+                            <h3 style="display:none"/>{{ name }}님 구독해주셔서 감사합니다.</h3>
                         </div>
-                    {% endif %}
-
-
                 </div>
             </div>
         </div>
@@ -226,6 +224,13 @@
 
     <!-- Theme JavaScript -->
     <script src="{% static 'js/freelancer.js' %}"></script>
+
+    <script>
+    $('#submit').click(function(){
+        $('#loading').show();
+        $('#submit').hide();
+    });
+    </script>
 
 </body>
 
