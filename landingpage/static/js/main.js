@@ -1,34 +1,75 @@
 $(function() {
 
-
     // Submit post on submit
-    $('#contactForm').on('submit', function(event){
-        event.preventDefault();
-        console.log("form submitted!")  // sanity check
-        register_subscription();
+    $("#contactForm input").jqBootstrapValidation({
+        preventSubmit: true,
+        submitError: function($form, event, errors) {
+            $("#submit").attr("disabled", true);
+            // additional error messages or events
+        },
+        submitSuccess: function($form, event) {
+            // Prevent spam click and default submit behaviour
+            $("#submit").attr("disabled", true);
+            $('#loading').show();
+            event.preventDefault();
+            register_subscription();
+        },
+        filter: function() {
+            return $(this).is(":visible");
+        },
+    });
+
+    $("a[data-toggle=\"tab\"]").click(function(e) {
+        e.preventDefault();
+        $(this).tab("show");
     });
 
     // AJAX for posting
     function register_subscription() {
         console.log("create post is working!") // sanity check
         $.ajax({
-            url : "#contact/", // the endpoint
+            url : "register/", // the endpoint
             type : "POST", // http method
-            data : $(this).serialize(), // data sent with the post request
+            data : {
+                name : $('#id_name').val(),
+                email : $('#id_email').val() }, // data sent with the post request
             // handle a successful response
             success : function(json) {
-                $('#post-text').val(''); // remove the value from the input
-                console.log(json); // log the returned json to the console
-                $("#talk").prepend("<li><strong>"+json.text+"</strong> - <em> "+json.author+"</em> - <span> "+json.created+
-                    "</span> - <a id='delete-post-"+json.postpk+"'>delete me</a></li>");
-                console.log("success"); // another sanity check
+                $('#loading').hide();
+                $("#submit").attr("disabled", false);
+                if(json.email == "email_existed") {
+                    $('#success').html("<div class='alert alert-warning'>");
+                    $('#success > .alert-warning').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+                        .append("</button>");
+                    $('#success > .alert-warning')
+                        .prepend("<strong>이미 등록된 이메일 입니다.</strong>");
+                    $('#success > .alert-success')
+                        .append('</div>');
+                }
+                else {
+                    $('#success').html("<div class='alert alert-success'>");
+                    $('#success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+                        .append("</button>");
+                    $('#success > .alert-success')
+                        .prepend("<strong>Thanks " + json.name + " :), Our welcome message has been sent. </strong>");
+                    $('#success > .alert-success')
+                        .append('</div>');
+                }
+                //clear all fields
+                $('#contactForm').trigger("reset");
             },
             // handle a non-successful response
             error : function(xhr,errmsg,err) {
-                $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
-                    " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-            }
+                // Fail message
+                $('#loading').hide();
+                $('#success').html("<div class='alert alert-danger'>");
+                $('#success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+                    .append("</button>");
+                $('#success > .alert-danger').prepend("<strong>Sorry , it seems that my mail server is not responding. Please try again later!");
+                $('#success > .alert-danger').append('</div>');
+                //clear all fields
+                $('#contactForm').trigger("reset");
+            },
         });
     };
 
@@ -84,4 +125,11 @@ $(function() {
         }
     });
 
+});
+
+
+// When clicking on Full hide fail/success boxes
+$('#id_name').focus(function() {
+    $('#success').html('');
+    $("#submit").removeAttr("disabled", true);
 });
